@@ -31,16 +31,15 @@ Create a code quiz that contains the following requirements:
 
 They will be added as the pesudocode is made
 
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
+- [] Click the button and start the timer
+  - [] Display first question
+  - [] When the answer is clicked, show the next question
+  - [] If the answer is incorrect, subtract 5s from the timer
+- [] When the timer reaches 0, or all the quiz is answered, the quiz should be ended
+  - [] display their score of the remaining timer, let user input their initials to save their score
+- [] User can see the history of highest score list in highscores page
+  - [] Display The list of score in the order of highest
+  - [] User can delete the score history by clicking clear score button
 
 These roadmap result will look like thepicture below
 
