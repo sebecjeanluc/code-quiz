@@ -31,8 +31,8 @@ Create a code quiz that contains the following requirements:
 
 They will be added as the pesudocode is made
 
-- [] Click the button and start the timer
-  - [] Display first question
+- [x] Click the button and start the timer
+  - [x] Display first question
   - [] When the answer is clicked, show the next question
   - [] If the answer is incorrect, subtract 5s from the timer
 - [] When the timer reaches 0, or all the quiz is answered, the quiz should be ended
@@ -44,7 +44,7 @@ They will be added as the pesudocode is made
 These roadmap result will look like thepicture below
 
 The following animation demonstrates the application functionality:
-![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/08-web-apis-challenge-demo.gif)
+![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/guide/08-web-apis-challenge-demo.gif)
 
 ## Important note
 

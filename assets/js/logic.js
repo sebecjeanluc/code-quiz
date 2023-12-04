@@ -2,8 +2,8 @@ const timeDisplay = document.getElementById('time')
 const startScreen = document.getElementById('start-screen')
 const startButton = document.getElementById('start')
 const questions = document.getElementById('questions')
-const questionTitle = document.getElementById('questions-title')
-const choices = document.getElementById('choices')
+const questionTitle = document.getElementById('question-title')
+const choicesElement = document.getElementById('choices')
 const endScreen = document.getElementById('end-screen')
 const finalScore = document.getElementById('final-score')
 const initials = document.getElementById('initials')
@@ -20,18 +20,77 @@ const feedback = document.getElementById('feedback')
 // index.html
 
 // Define the questions and choices and the answeres, put it in a variable in questions.js file
+
 // Timer -> add click event listenr to "start quiz" button adn trigger the timer
+let duration = 10
+timeDisplay.textContent = duration
+
+function timerCountDown() {
+	duration--
+	if (duration >= 1) {
+		timeDisplay.textContent = duration
+	} else {
+		timeDisplay.textContent = 'Time is up!'
+	}
+}
+
+// console.log(timeDisplay)
+//          element you want to put / content
+function createChoicesElement(element, choiceContent) {
+	choiceButton.textContent = choiceContent
+}
+
 // Display first question
-//  Add click event to start button
-//  Display the first question from the questions and hide the start-screen content
-// Add click event to the choices div and check if the choice button is clicked
-//  Check if the answer is correct
-//  if correct, display correct answer in the feedback section
-//    Hide the feedback section after few seconds
-//  if incorrect, substract 5seconds from the timer
-//    Display "Wrong answer" in the feedback section
+let currentQuestionIndex = 0
+
+function displayQuestion() {
+	if (currentQuestionIndex < questionsList.length) {
+		questionTitle.textContent = questionsList[currentQuestionIndex].question
+
+		let choicesItems = questionsList[currentQuestionIndex].choices
+
+		for (i = 0; i < choicesItems.length; i++) {
+			let choiceButton = document.createElement('button')
+			choiceButton.setAttribute('class', 'choiceButton')
+			choiceButton.setAttribute('for', i)
+			choicesElement.appendChild(choiceButton)
+			choiceButton.textContent = `${i + 1}. ${choicesItems[i]}`
+			// Add click event to the choices div and check if the choice button is clicked
+			choiceButton.addEventListener('click', function () {
+				let userChoice = parseInt(choiceButton.getAttribute('for'))
+				// console.log(userChoice)
+				let correct = questionsList[0].correct
+				// console.log(correct)
+				//  Check if the answer is correct
+				if (userChoice === correct) {
+					//  if correct, display correct answer in the feedback section
+					console.log('Voilla')
+					//    Hide the feedback section after few seconds
+				} else {
+					//  if incorrect, substract 5seconds from the timer
+					//    Display "Wrong answer" in the feedback section
+					console.log("You've got a wrong number!")
+				}
+
+				// show next question and so on
+			})
+		}
+	}
+}
 //    Check the timer, if timer > 0, display next question.
 //    If timer <= display the end-scren
+
+console.log('currentQuestionIndex ' + currentQuestionIndex)
+
+//  Add click event to start button
+startButton.addEventListener('click', function (event) {
+	event.preventDefault()
+	var intervalId = setInterval(timerCountDown, 1000)
+	//  Display the first question from the questions and hide the start-screen content
+	startScreen.setAttribute('class', 'hide')
+	questions.setAttribute('class', 'question__wrapper')
+	displayQuestion()
+})
 
 // highscores.html
 // Retrive highscores from local storage
