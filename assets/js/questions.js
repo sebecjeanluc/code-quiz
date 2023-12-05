@@ -5,7 +5,7 @@ var questionsList = [
 		choices: [
 			"'Space', 'Mind', 'Reality', 'Power', 'Time', 'Soul'",
 			"'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'",
-			'1, 2, 3, 4, 5, 6',
+			'One, Two, Three, Four, Five, Six',
 			"'Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange'",
 			".push('Space', 'Mind', 'Reality', 'Power', 'Time', 'Soul')",
 		],

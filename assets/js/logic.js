@@ -6,9 +6,9 @@ const questionTitle = document.getElementById('question-title')
 const choicesElement = document.getElementById('choices')
 const endScreenElement = document.getElementById('end-screen')
 const finalScoreElement = document.getElementById('final-score')
+const feedbackElement = document.getElementById('feedback')
 const initials = document.getElementById('initials')
 const submitButton = document.getElementById('submit')
-const feedbackElement = document.getElementById('feedback')
 
 //  Click the button and start the timer
 //    Display first question
@@ -22,7 +22,7 @@ const feedbackElement = document.getElementById('feedback')
 // Define the questions and choices and the answeres, put it in a variable in questions.js file
 
 // Timer -> add click event listenr to "start quiz" button adn trigger the timer
-let duration = 600
+let duration = 60
 let intervalId
 timeDisplay.textContent = duration
 
@@ -31,15 +31,15 @@ function timerCountDown() {
 	if (duration >= 1) {
 		timeDisplay.textContent = duration
 	} else {
-		timeDisplay.textContent = 'Time is up!'
 		takeMeToEndScreen()
+		timeDisplay.textContent = 'Time is up!'
+		finalScoreElement.textContent = duration
 		clearInterval(intervalId)
 	}
 }
 
 function eraseFeedbackElement() {
 	feedbackElement.setAttribute('class', 'feedback hide')
-	console.log('erased!')
 }
 
 function takeMeToEndScreen() {
@@ -49,9 +49,9 @@ function takeMeToEndScreen() {
 }
 // Display first question
 let currentQuestionIndex = 0
-let choicesItems = questionsList[currentQuestionIndex].choices
 
 function createChoices() {
+	let choicesItems = questionsList[currentQuestionIndex].choices
 	for (i = 0; i < choicesItems.length; i++) {
 		var choiceButton = document.createElement('button')
 		choiceButton.setAttribute('class', 'choiceButton')
@@ -67,7 +67,7 @@ function createChoices() {
 
 function userSelectAction(event) {
 	let userChoice = parseInt(event.currentTarget.getAttribute('for'))
-	let correct = questionsList[0].correct
+	let correct = questionsList[currentQuestionIndex].correct
 	//  Check if the answer is correct
 	if (userChoice === correct) {
 		//  if correct, display correct answer in the feedback section
@@ -81,41 +81,36 @@ function userSelectAction(event) {
 		feedbackElement.setAttribute('class', 'feedback')
 		feedbackElement.textContent = 'Non, incorrect! Minus 5 seconds'
 		//  if incorrect, substract 5seconds from the timer
-		console.log(duration)
 		duration -= 5
-		console.log(duration)
 	}
 	if (duration > 0) {
 		currentQuestionIndex += 1
 	}
-	console.log('currentQuestionIndex ' + currentQuestionIndex)
+	updateQuestions()
 }
 
-function updateChoices() {
-	let existingButton = document.querySelector('.choiceButton')
-	let choicesItems = questionsList[currentQuestionIndex].choices
-
-	if (existingButton.length == choicesItems.length) {
+function updateQuestions() {
+	if (currentQuestionIndex < questionsList.length) {
+		questionTitle.textContent = questionsList[currentQuestionIndex].question
+		let existingButton = document.querySelectorAll('.choiceButton')
+		let choicesItems = questionsList[currentQuestionIndex].choices
 		for (i = 0; i < choicesItems.length; i++) {
-			existingButton.textContent = `${i + 1}. ${choicesItems[i]}`
+			existingButton[i].textContent = `${i + 1}. ${choicesItems[i]}`
 		}
-	}
-}
-
-function displayQuestion() {
-	// if (currentQuestionIndex < questionsList.length) {
-	questionTitle.textContent = questionsList[currentQuestionIndex].question
-	createChoices()
-	console.log('currentQuestionIndex ' + currentQuestionIndex)
-	if (currentQuestionIndex === questionsList.length) {
+	} else {
+		console.log('All done')
 		clearInterval(intervalId)
 		setTimeout(takeMeToEndScreen(), 3000)
 		finalScoreElement.textContent = duration
 	}
-	questionTitle.textContent = questionsList[currentQuestionIndex].question
+	console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
 }
 
-console.log('currentQuestionIndex ' + currentQuestionIndex)
+function displayQuestion() {
+	questionTitle.textContent = questionsList[currentQuestionIndex].question
+	createChoices()
+	console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
+}
 
 //  Add click event to start button
 startButton.addEventListener('click', function (event) {
@@ -123,9 +118,31 @@ startButton.addEventListener('click', function (event) {
 	intervalId = setInterval(timerCountDown, 1000)
 	//  Display the first question from the questions and hide the start-screen content
 	startScreen.setAttribute('class', 'hide')
-	questionsElement.setAttribute('class', 'question__wrapper')
+	questionsElement.removeAttribute('class', 'hide')
 	displayQuestion()
 })
+
+submitButton.addEventListener('click', saveScore)
+
+function saveScore(event) {
+	event.preventDefault()
+	console.log('submit')
+	let userInitials = initials.value
+	console.log(userInitials)
+	let finalScore = duration
+	console.log(finalScore)
+
+	let initialScore = {
+		initial: userInitials,
+		score: finalScore,
+	}
+
+	let existingScores = JSON.parse(localStorage.getItem('users')) || []
+	console.log(existingScores)
+	existingScores.push(initialScore)
+
+	localStorage.setItem('users', JSON.stringify(existingScores))
+}
 
 // highintervalIds.html
 // Retrive highintervalIds from local storage
