@@ -1,13 +1,13 @@
 const timeDisplay = document.getElementById('time')
 const startScreen = document.getElementById('start-screen')
 const startButton = document.getElementById('start')
-const questionsElement = document.getElementById('questions')
+const questionsContainer = document.getElementById('questions')
 const questionTitle = document.getElementById('question-title')
-const choicesElement = document.getElementById('choices')
-const endScreenElement = document.getElementById('end-screen')
-const finalScoreElement = document.getElementById('final-score')
-const feedbackElement = document.getElementById('feedback')
-const initials = document.getElementById('initials')
+const choicesContainer = document.getElementById('choices')
+const endScreen = document.getElementById('end-screen')
+const finalScoreDisplay = document.getElementById('final-score')
+const feedbackDisplay = document.getElementById('feedback')
+const initialsInput = document.getElementById('initials')
 const submitButton = document.getElementById('submit')
 
 //  Click the button and start the timer
@@ -15,48 +15,48 @@ const submitButton = document.getElementById('submit')
 //    When the answer is clicked, show the next question
 //    If the answer is incorrect, subtract 5s from the timer
 //  When the timer reaches 0, or all the quiz is answered, the quiz should be ended
-//    display their intervalId of the remaining timer, let user input their initials to save their intervalId
+//    display their quizTimer of the remaining timer, let user input their initials to save their quizTimer
 
 // index.html
 
 // Define the questions and choices and the answeres, put it in a variable in questions.js file
 
 // Timer -> add click event listenr to "start quiz" button adn trigger the timer
-let duration = 60
-let intervalId
-timeDisplay.textContent = duration
+let quizDuration = 60
+let quizTimer
+timeDisplay.textContent = quizDuration
 
-function timerCountDown() {
-	duration--
-	if (duration >= 1) {
-		timeDisplay.textContent = duration
+function startTimer() {
+	quizDuration--
+	if (quizDuration >= 1) {
+		timeDisplay.textContent = quizDuration
 	} else {
-		takeMeToEndScreen()
+		endQuiz()
 		timeDisplay.textContent = 'Time is up!'
-		finalScoreElement.textContent = duration
-		clearInterval(intervalId)
+		finalScoreDisplay.textContent = quizDuration
+		clearInterval(quizTimer)
 	}
 }
 
-function eraseFeedbackElement() {
-	feedbackElement.setAttribute('class', 'feedback hide')
+function hideFeedbackDisplay() {
+	feedbackDisplay.setAttribute('class', 'feedback hide')
 }
 
-function takeMeToEndScreen() {
-	endScreenElement.removeAttribute('class', 'hide')
-	questionsElement.setAttribute('class', 'hide')
-	timeDisplay.textContent = duration
+function endQuiz() {
+	endScreen.removeAttribute('class', 'hide')
+	questionsContainer.setAttribute('class', 'hide')
+	timeDisplay.textContent = quizDuration
 }
 // Display first question
 let currentQuestionIndex = 0
 
-function createChoices() {
+function createChoiceButtons() {
 	let choicesItems = questionsList[currentQuestionIndex].choices
 	for (i = 0; i < choicesItems.length; i++) {
 		var choiceButton = document.createElement('button')
 		choiceButton.setAttribute('class', 'choiceButton')
 		choiceButton.setAttribute('for', i)
-		choicesElement.appendChild(choiceButton)
+		choicesContainer.appendChild(choiceButton)
 		choiceButton.textContent = `${i + 1}. ${choicesItems[i]}`
 	}
 	const choiceButtons = document.querySelectorAll('.choiceButton')
@@ -71,19 +71,19 @@ function userSelectAction(event) {
 	//  Check if the answer is correct
 	if (userChoice === correct) {
 		//  if correct, display correct answer in the feedback section
-		setTimeout(eraseFeedbackElement, 2000)
-		feedbackElement.setAttribute('class', 'feedback')
-		feedbackElement.textContent = 'Voila! Correct!'
+		setTimeout(hideFeedbackDisplay, 2000)
+		feedbackDisplay.setAttribute('class', 'feedback')
+		feedbackDisplay.textContent = 'Voila! Correct!'
 		//    Hide the feedback section after few seconds
 	} else {
 		//    Display "Wrong answer" in the feedback section
-		setTimeout(eraseFeedbackElement, 2000)
-		feedbackElement.setAttribute('class', 'feedback')
-		feedbackElement.textContent = 'Non, incorrect! Minus 5 seconds'
+		setTimeout(hideFeedbackDisplay, 2000)
+		feedbackDisplay.setAttribute('class', 'feedback')
+		feedbackDisplay.textContent = 'Non, incorrect! Minus 5 seconds'
 		//  if incorrect, substract 5seconds from the timer
-		duration -= 5
+		quizDuration -= 5
 	}
-	if (duration > 0) {
+	if (quizDuration > 0) {
 		currentQuestionIndex += 1
 	}
 	updateQuestions()
@@ -99,38 +99,36 @@ function updateQuestions() {
 		}
 	} else {
 		// console.log('All done')
-		clearInterval(intervalId)
-		setTimeout(takeMeToEndScreen(), 3000)
-		finalScoreElement.textContent = duration
+		clearInterval(quizTimer)
+		setTimeout(endQuiz(), 3000)
+		finalScoreDisplay.textContent = quizDuration
 	}
 	// console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
 }
 
-function displayQuestion() {
+function startQuiz() {
 	questionTitle.textContent = questionsList[currentQuestionIndex].question
-	createChoices()
+	createChoiceButtons()
 	// console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
 }
 
 //  Add click event to start button
 startButton.addEventListener('click', function (event) {
 	event.preventDefault()
-	intervalId = setInterval(timerCountDown, 1000)
+	quizTimer = setInterval(startTimer, 1000)
 	//  Display the first question from the questions and hide the start-screen content
 	startScreen.setAttribute('class', 'hide')
-	questionsElement.removeAttribute('class', 'hide')
-	displayQuestion()
+	questionsContainer.removeAttribute('class', 'hide')
+	startQuiz()
 })
 
 submitButton.addEventListener('click', saveScore)
 
 function saveScore(event) {
-	// localStorage.clear()
-
 	event.preventDefault()
-	let userInitials = initials.value
+	let userInitials = initialsInput.value
 	// console.log(userInitials)
-	let finalScore = duration
+	let finalScore = quizDuration
 	// console.log(finalScore)
 
 	let initialScore = {
