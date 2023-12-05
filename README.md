@@ -31,21 +31,22 @@ Create a code quiz that contains the following requirements:
 
 They will be added as the pesudocode is made
 
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
-- []
+- [x] Click the button and start the timer
+  - [x] Display first question
+  - [x] When the answer is clicked, show the next question
+  - [x] If the answer is incorrect, subtract 5s from the timer
+- [x] When the timer reaches 0, or all the quiz is answered, the quiz should be ended
+  - [x] display their score of the remaining timer, let user input their initials to save their score
+- [x] User can see the history of highest score list in highscores page
+  - [x] Display The list of score in the order of highest
+  - [x] User can delete the score history by clicking clear score button
+  - [] Refactor variable names and comments
+  - [] Deploy the application
 
 These roadmap result will look like thepicture below
 
-The following animation demonstrates the application functionality:
-![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/08-web-apis-challenge-demo.gif)
+The following mock-up animation demonstrates the application functionality:
+![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/guide/08-web-apis-challenge-demo.gif)
 
 ## Important note
 
@@ -54,6 +55,8 @@ add what techniques are used here
 ### Preview
 
 ![Preview](./assets/images/demo.png)
+![Preview](./assets/images/demo2.png)
+![Preview](./assets/images/demo3.png)
 
 #### This is the Github page
 
