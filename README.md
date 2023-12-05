@@ -2,7 +2,7 @@
 
 ## About this project
 
-This project is to create a browser-based timed coding quiz with multiple-choice questions, using dynamic HTML, CSS, and JavaScript for a responsive interface, applying skills you've learned in this module.
+This project is to create a browser-based timed coding quiz with multiple-choice questions, using dynamic HTML, CSS, and JavaScript for a responsive interface, applying skills I've learned in this module.
 
 ### User Story
 
@@ -50,7 +50,7 @@ The following mock-up animation demonstrates the application functionality:
 
 ## Important note
 
-add what techniques are used here
+a variety of techniques in Javascript are used such as DOM Manipulation, Event Handling, Conditional Logic, Looping, Template Literals, Data Attributes, and Local Storage API.
 
 ### Preview
 
