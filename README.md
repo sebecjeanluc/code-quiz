@@ -40,8 +40,8 @@ They will be added as the pesudocode is made
 - [x] User can see the history of highest score list in highscores page
   - [x] Display The list of score in the order of highest
   - [x] User can delete the score history by clicking clear score button
-  - [] Refactor variable names and comments
-  - [] Deploy the application
+  - [x] Refactor variable names and comments
+  - [x] Deploy the application
 
 These roadmap result will look like thepicture below
 
