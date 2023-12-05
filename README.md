@@ -45,7 +45,7 @@ They will be added as the pesudocode is made
 
 These roadmap result will look like thepicture below
 
-The following animation demonstrates the application functionality:
+The following mock-up animation demonstrates the application functionality:
 ![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/guide/08-web-apis-challenge-demo.gif)
 
 ## Important note
@@ -55,6 +55,8 @@ add what techniques are used here
 ### Preview
 
 ![Preview](./assets/images/demo.png)
+![Preview](./assets/images/demo2.png)
+![Preview](./assets/images/demo3.png)
 
 #### This is the Github page
 
