@@ -74,12 +74,14 @@ function userSelectAction(event) {
 		setTimeout(hideFeedbackDisplay, 2000)
 		feedbackDisplay.setAttribute('class', 'feedback')
 		feedbackDisplay.textContent = 'Voila! Correct!'
+		correctSound()
 		//    Hide the feedback section after few seconds
 	} else {
 		//    Display "Wrong answer" in the feedback section
 		setTimeout(hideFeedbackDisplay, 2000)
 		feedbackDisplay.setAttribute('class', 'feedback')
 		feedbackDisplay.textContent = 'Non, incorrect! Minus 5 seconds'
+		incorrectSound()
 		//  if incorrect, substract 5seconds from the timer
 		quizDuration -= 5
 	}
@@ -150,9 +152,13 @@ function saveScore(event) {
 }
 
 // Add the audio file qith event lister when user gets correct or incorrect answer
-// const correctAudio = new Audio('./assets/sfx/correct.wav');
-// const incorrectAudio = new Audio('./assets/sfx/incorrect.wav');
+const correctSoundEffect = new Audio('./assets/sfx/correct.wav')
+const incorrectSoundEffect = new Audio('./assets/sfx/incorrect.wav')
 // // Example to play the audio when start button is clicked
-// document.getElementById('start').addEventListener('click', function() {
-//     incorrectAudio.play();
-// });
+
+function correctSound() {
+	correctSoundEffect.play()
+}
+function incorrectSound() {
+	incorrectSoundEffect.play()
+}
