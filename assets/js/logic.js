@@ -98,18 +98,18 @@ function updateQuestions() {
 			existingButton[i].textContent = `${i + 1}. ${choicesItems[i]}`
 		}
 	} else {
-		console.log('All done')
+		// console.log('All done')
 		clearInterval(intervalId)
 		setTimeout(takeMeToEndScreen(), 3000)
 		finalScoreElement.textContent = duration
 	}
-	console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
+	// console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
 }
 
 function displayQuestion() {
 	questionTitle.textContent = questionsList[currentQuestionIndex].question
 	createChoices()
-	console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
+	// console.log('CurrentQuestion ' + (currentQuestionIndex + 1))
 }
 
 //  Add click event to start button
@@ -125,12 +125,13 @@ startButton.addEventListener('click', function (event) {
 submitButton.addEventListener('click', saveScore)
 
 function saveScore(event) {
+	// localStorage.clear()
+
 	event.preventDefault()
-	console.log('submit')
 	let userInitials = initials.value
-	console.log(userInitials)
+	// console.log(userInitials)
 	let finalScore = duration
-	console.log(finalScore)
+	// console.log(finalScore)
 
 	let initialScore = {
 		initial: userInitials,
@@ -138,17 +139,17 @@ function saveScore(event) {
 	}
 
 	let existingScores = JSON.parse(localStorage.getItem('users')) || []
-	console.log(existingScores)
+	// console.log(existingScores)
 	existingScores.push(initialScore)
-
+	// console.log(existingScores)
 	localStorage.setItem('users', JSON.stringify(existingScores))
-}
+	this.disabled = true
 
-// highintervalIds.html
-// Retrive highintervalIds from local storage
-// Sort the intervalIds from higher intervalId to lower intervalId
-// Display the highintervalIds as a list
-// When the user click on "Clear HighintervalIds", clear local storage.
+	function moveToHistory() {
+		window.location.href = 'highscores.html'
+	}
+	setTimeout(moveToHistory, 1000)
+}
 
 // Add the audio file qith event lister when user gets correct or incorrect answer
 // const correctAudio = new Audio('./assets/sfx/correct.wav');

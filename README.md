@@ -33,13 +33,15 @@ They will be added as the pesudocode is made
 
 - [x] Click the button and start the timer
   - [x] Display first question
-  - [] When the answer is clicked, show the next question
-  - [] If the answer is incorrect, subtract 5s from the timer
-- [] When the timer reaches 0, or all the quiz is answered, the quiz should be ended
-  - [] display their score of the remaining timer, let user input their initials to save their score
-- [] User can see the history of highest score list in highscores page
-  - [] Display The list of score in the order of highest
-  - [] User can delete the score history by clicking clear score button
+  - [x] When the answer is clicked, show the next question
+  - [x] If the answer is incorrect, subtract 5s from the timer
+- [x] When the timer reaches 0, or all the quiz is answered, the quiz should be ended
+  - [x] display their score of the remaining timer, let user input their initials to save their score
+- [x] User can see the history of highest score list in highscores page
+  - [x] Display The list of score in the order of highest
+  - [x] User can delete the score history by clicking clear score button
+  - [] Refactor variable names and comments
+  - [] Deploy the application
 
 These roadmap result will look like thepicture below
 
